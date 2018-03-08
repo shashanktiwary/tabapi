@@ -1,3 +1,23 @@
 <div class="dashboard">
-  Dashboard Component
+  <ul>
+    <li ng-repeat="tab in $ctrl.$tabs.tabs" ng-click="$ctrl.moveTab(tab)" ng-bind="tab.title"></li>
+  </ul>
+  <div ng-if="$ctrl.$tabs.current.id === 'section'">
+    Section .........
+  </div>
+  <div ng-if="$ctrl.$tabs.current.id === 'columns'">
+    Columns ........
+  </div>
+  <div ng-if="$ctrl.$tabs.current.id === 'rows'">
+    Rows .........
+  </div>
+  <div ng-if="$ctrl.$tabs.current.id === 'anything'">
+    Anything .......
+  </div>
+  <div>
+    <input type="button" ng-if="$ctrl.$tabs.current.hasPrevious" value="Previous" ng-click="$ctrl.$tabs.previous()" />
+    <input type="button" ng-if="$ctrl.$tabs.current.hasNext" value="Next" ng-click="$ctrl.$tabs.next()" />
+    <input type="button" value="AutoSave" ng-click="$ctrl.$tabs.autoSave()" />
+    <input type="button" value="AutoSave" ng-click="$ctrl.$tabs.cancel()" />
+  </div>
 </div>
