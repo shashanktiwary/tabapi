@@ -3,10 +3,10 @@
     this.tabs = null;
     this.current = null;
 
-    this.build = function (tabs, defaultTabId) {
+    this.build = function (tabs, defaultTabId, defaultData) {
       this.tabs = tabs;
       this.current = this.getTabByKey(defaultTabId);
-      return this.current.load();
+      return this.current.load(this.current, defaultData);
     };
 
     this.remove = function (tabId) {
@@ -40,9 +40,10 @@
           // unload current tab
           this.unload(targetTab, autoResult).then(angular.bind(this, function (result) {
 
+            var lastTab = this.current
             // on success set target tab as current tab
             this.current = targetTab;
-            this.current.load(autoResult).then(angular.bind(this, function () {
+            this.current.load(lastTab, autoResult).then(angular.bind(this, function () {
               defex.resolve(result);
             }), function (error) {
               defex.reject({ reason: 'load', error: error });
@@ -102,7 +103,8 @@
     };
 
     this.cancel = function () {
-      return this.current.cancel();
+      if (this.current.cancel)
+        return this.current.cancel();
     };
   };
 

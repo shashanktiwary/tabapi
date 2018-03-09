@@ -4,9 +4,17 @@
   </ul>
   <div ng-if="$ctrl.$tabs.current.id === 'section'">
     Section .........
+    <select ng-model="$ctrl.form.section.selectedSection" ng-disabled="$ctrl.form.section.disableSelect">
+      <option value="AB">AB</option>
+      <option value="CD">CD</option>
+      <option value="CD">EF</option>
+    </select>
+    <input name="sectionName" type="text" ng-model="$ctrl.form.section.name" />
   </div>
   <div ng-if="$ctrl.$tabs.current.id === 'columns'">
     Columns ........
+    <span>Last Section Name : </span>
+    <span ng-bind="$ctrl.form.columns.sectionName"></span>
   </div>
   <div ng-if="$ctrl.$tabs.current.id === 'rows'">
     Rows .........
@@ -15,9 +23,9 @@
     Anything .......
   </div>
   <div>
-    <input type="button" ng-if="$ctrl.$tabs.current.hasPrevious" value="Previous" ng-click="$ctrl.$tabs.previous()" />
-    <input type="button" ng-if="$ctrl.$tabs.current.hasNext" value="Next" ng-click="$ctrl.$tabs.next()" />
-    <input type="button" value="AutoSave" ng-click="$ctrl.$tabs.autoSave()" />
-    <input type="button" value="AutoSave" ng-click="$ctrl.$tabs.cancel()" />
+    <input type="button" ng-if="$ctrl.$tabs.current.hasPrevious" value="Previous" ng-click="$ctrl.movePrevious()" />
+    <input type="button" ng-if="$ctrl.$tabs.current.hasNext" value="Next" ng-click="$ctrl.moveNext()" />
+    <input type="button" value="AutoSave" ng-click="$ctrl.autoSave()" />
+    <input type="button" value="Cancel" ng-click="$ctrl.cancel()" />
   </div>
 </div>
